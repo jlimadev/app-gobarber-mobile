@@ -52,7 +52,7 @@ const SignUp: React.FC = () => {
             >
               <Input
                 name="name"
-                icon="mail"
+                icon="user"
                 placeholder="Name"
                 autoCapitalize="words"
                 returnKeyType="next"
