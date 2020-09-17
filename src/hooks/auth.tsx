@@ -10,6 +10,7 @@ import api from '../services/api';
 
 interface AuthContextData {
   user: object;
+  isLoading: boolean;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
 }
@@ -28,6 +29,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>({} as AuthState);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadStorageData = async (): Promise<void> => {
@@ -39,6 +41,8 @@ const AuthProvider: React.FC = ({ children }) => {
       if (token[1] && user[1]) {
         setData({ token: token[1], user: JSON.parse(user[1]) });
       }
+
+      setIsLoading(false);
     };
 
     loadStorageData();
@@ -67,7 +71,9 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, signIn, signOut, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );
