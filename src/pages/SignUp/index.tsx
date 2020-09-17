@@ -13,6 +13,7 @@ import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
+import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -53,14 +54,14 @@ const SignUp: React.FC = () => {
         abortEarly: false,
       });
 
-      /* await api.post('/users', data); */
+      await api.post('/users', data);
 
       Alert.alert(
         'Cadastro Realizado',
         'Cadastro realizado com sucesso, você já pode realizar o seu logon.',
       );
 
-      /* history.push('/'); */
+      navigation.goBack();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
