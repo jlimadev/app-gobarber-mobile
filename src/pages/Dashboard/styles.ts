@@ -1,4 +1,4 @@
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
@@ -92,4 +92,16 @@ export const ProviderMetaText = styled.Text`
   margin-left: 8px;
   color: #999591;
   font-family: 'RobotoSlab-Regular';
+`;
+
+export const SignOutButton = styled.TouchableOpacity`
+  /* flex-direction: row; */
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  background: #28262e;
+  border-radius: 36px;
+  height: 40px;
+  width: 40px;
+  margin: 5px auto;
 `;

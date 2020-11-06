@@ -19,6 +19,7 @@ import {
   ProviderName,
   ProviderMeta,
   ProviderMetaText,
+  SignOutButton,
 } from './styles';
 
 export interface Provider {
@@ -50,49 +51,58 @@ const Dashboard: React.FC = () => {
     [navigate],
   );
 
+  const signOutHandler = useCallback(() => {
+    signOut();
+  }, [signOut]);
+
   return (
-    <Container>
-      <Header>
-        <HeaderTitle>
-          Bem vindo, {'\n'}
-          <UserName>{user.name}</UserName>
-        </HeaderTitle>
+    <>
+      <Container>
+        <Header>
+          <HeaderTitle>
+            Bem vindo, {'\n'}
+            <UserName>{user.name}</UserName>
+          </HeaderTitle>
 
-        <ProfileButton onPress={navigateToProfile}>
-          <UserAvatar source={{ uri: user.avatar_url }} />
-        </ProfileButton>
-      </Header>
+          <ProfileButton onPress={navigateToProfile}>
+            <UserAvatar source={{ uri: user.avatar_url }} />
+          </ProfileButton>
+        </Header>
 
-      <ProvidersList
-        data={providers}
-        keyExtractor={provider => provider.id}
-        ListHeaderComponent={
-          <ProvidersListTitle>Cabeleireiros</ProvidersListTitle>
-        }
-        renderItem={({ item: provider }) => (
-          <ProviderContainer
-            onPress={() => {
-              navigateToCreateAppointment(provider.id);
-            }}
-          >
-            <ProviderAvatar source={{ uri: provider.avatar_url }} />
+        <ProvidersList
+          data={providers}
+          keyExtractor={provider => provider.id}
+          ListHeaderComponent={
+            <ProvidersListTitle>Cabeleireiros</ProvidersListTitle>
+          }
+          renderItem={({ item: provider }) => (
+            <ProviderContainer
+              onPress={() => {
+                navigateToCreateAppointment(provider.id);
+              }}
+            >
+              <ProviderAvatar source={{ uri: provider.avatar_url }} />
 
-            <ProviderInfo>
-              <ProviderName>{provider.name}</ProviderName>
+              <ProviderInfo>
+                <ProviderName>{provider.name}</ProviderName>
 
-              <ProviderMeta>
-                <Icon name="calendar" size={14} color="#ff9000" />
-                <ProviderMetaText>Segunda à sexta</ProviderMetaText>
-              </ProviderMeta>
-              <ProviderMeta>
-                <Icon name="clock" size={14} color="#ff9000" />
-                <ProviderMetaText>8h às 18h</ProviderMetaText>
-              </ProviderMeta>
-            </ProviderInfo>
-          </ProviderContainer>
-        )}
-      />
-    </Container>
+                <ProviderMeta>
+                  <Icon name="calendar" size={14} color="#ff9000" />
+                  <ProviderMetaText>Segunda à sexta</ProviderMetaText>
+                </ProviderMeta>
+                <ProviderMeta>
+                  <Icon name="clock" size={14} color="#ff9000" />
+                  <ProviderMetaText>8h às 18h</ProviderMetaText>
+                </ProviderMeta>
+              </ProviderInfo>
+            </ProviderContainer>
+          )}
+        />
+        <SignOutButton onPress={signOutHandler}>
+          <Icon name="x-circle" size={24} color="#999591" />
+        </SignOutButton>
+      </Container>
+    </>
   );
 };
 
