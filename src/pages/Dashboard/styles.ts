@@ -95,7 +95,6 @@ export const ProviderMetaText = styled.Text`
 `;
 
 export const SignOutButton = styled.TouchableOpacity`
-  /* flex-direction: row; */
   align-items: center;
   justify-content: center;
   padding: 5px;
